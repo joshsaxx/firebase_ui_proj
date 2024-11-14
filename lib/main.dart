@@ -1,70 +1,53 @@
+import 'package:firebase_ui_proj/src/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const App());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: TAppTheme.lightTheme,
+      darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      themeMode: ThemeMode.system,
+      home: const AppHome(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class AppHome extends StatelessWidget {
+  const AppHome({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+      appBar: AppBar(title: const Text(".apple/"),leading: const Icon(Icons.ondemand_video_outlined),),
+      floatingActionButton: FloatingActionButton(child: const Icon(Icons.add_shopping_cart_outlined),onPressed: (){},),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ListView(
+          children: [
+            Text("Heading", style: Theme.of(context).textTheme.headlineLarge),
+            Text("Sub-heading", style: Theme.of(context).textTheme.titleSmall),
+            Text("Paragraph", style: Theme.of(context).textTheme.bodyLarge),
+            ElevatedButton(onPressed: (){}, child: const Text("Elevated Button")),
+            OutlinedButton(onPressed: (){}, child: const Text("Elevated Button")),
+            /*const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Image(image: AssetImage("assets/images/first.png")),
+            ),*/
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
+
+
